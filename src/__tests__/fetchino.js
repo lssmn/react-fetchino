@@ -28,12 +28,9 @@ describe('Fetchino', () => {
     });
 
     it('should fetch the request with props', () => {
-      console.error = jest.fn();
-
       wrapper = shallow(<Fetchino {...mockProps} />);
 
       expect(fetch).toHaveBeenCalledTimes(1);
-      expect(console.error).toHaveBeenCalledTimes(0);
     });
 
     it('should set the correct state', () => {
@@ -246,38 +243,33 @@ describe('Fetchino', () => {
       });
     });
     
-    it('should render children if both render and children functions', () => {
+    it('should render only children if both render and children functions', () => {
       const render = jest.fn();
       const children = jest.fn();
       
       wrapper.setProps({ render, children });
       
-      expect(render).not.toHaveBeenCalled();
       expect(children).toHaveBeenCalled();
-      expect(children).toHaveBeenCalledWith({
-        data: mockResponse, 
-        error: null,
-        loading: false
-      });
+      expect(render).not.toHaveBeenCalled();
     });
     
   });
 
-  describe('Composition', () => {
+  describe('Composition (code for demo)', () => {
     const mockResponse = {
       test: [{ prop: 1 }, { prop: 2 }, { prop: 3 }],
     };
     
     function LoadingComponent() {
-      return <span>Loading...</span>;
+      return <div>Loading...</div>;
     }
   
     function ErrorComponent({ message }) {
-      return <span>{message}</span>;
+      return <div>{message}</div>;
     }
   
     function DataComponent({ data }) {
-      return <span>{data.name}</span>;
+      return <div>{data.name}</div>;
     }
     
     function createComponent() {
