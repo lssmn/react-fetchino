@@ -1,7 +1,7 @@
 {
   "name": "react-fetchino",
   "description": "A tiny React component to fetch HTTP requests.",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "author": "Alessio Minichiello <minichielloalessio@gmail.com>",
   "license": "MIT",
   "repository": {
