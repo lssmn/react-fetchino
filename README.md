@@ -1,7 +1,6 @@
 # react-fetchino
 
 [![Build Status](https://travis-ci.org/lssmn/react-fetchino.svg?branch=master)](https://travis-ci.org/lssmn/react-fetchino)
-[![GitHub version](https://badge.fury.io/gh/lssmn%2Freact-fetchino.svg)](https://github.com/lssmn/react-fetchino.git)
 [![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg)](https://github.com/semantic-release/semantic-release)
 
 A tiny React component to fetch HTTP requests. It requires React >= 16.3.0.
@@ -17,9 +16,11 @@ $ yarn add react-fetchino
 
 ## Props
 
-- **url** (_string_, **required**): URL of the resource to fetch
-- **options** (_object_): overrides the default options {}
-- **render** (_function_): can be used instead of children
+| Name    | Type     | Required | Description                      |
+|---------|----------|----------|----------------------------------|
+| url     | string   | true     | URL of the resource to fetch     |
+| options | object   | false    | Overrides the default options {} |
+| render  | function | false    | Can be used instead of children  |
 
 ## Code examples
 
@@ -53,17 +54,23 @@ class App extends Component {
   render() {
     return (
       <Fetchino
-        url="https://swapi.co/api/planets/1/"
+        url="https://jsonplaceholder.typicode.com/posts"
         options={{
-          method: 'delete',
+          method: 'POST',
+          headers: {
+            'Content-type': 'application/json'
+          },
+          body: {
+            test: 'Test',
+          }
         }}
-        render={({ loading, error, data }) => {
+        render={({ loading, error, data }) => (
           <Fragment>
             {loading && <LoadingComponent />}
             {error && <ErrorComponent message={error} />}
-            {data && <PlanetComponent data={data} />}
-          </Fragment>;
-        }}
+            {data && <PostComponent data={data} />}
+          </Fragment>
+        )}
       />
     );
   }
