@@ -1,7 +1,7 @@
 {
   "name": "react-fetchino",
   "description": "A tiny React component to fetch HTTP requests.",
-  "version": "2.0.0",
+  "version": "0.0.0-development",
   "author": "Alessio Minichiello <minichielloalessio@gmail.com>",
   "license": "MIT",
   "repository": {
@@ -19,7 +19,18 @@
     "lint": "eslint ./src",
     "test": "jest",
     "test:coverage": "jest --coverage",
-    "test:watch": "jest --watchAll"
+    "test:watch": "jest --watchAll",
+    "travis-deploy-once": "travis-deploy-once",
+    "semantic-release": "semantic-release"
+  },
+  "release": {
+    "verifyConditions": [
+      "@semantic-release/npm",
+      "@semantic-release/github"
+    ],
+    "publish": [
+      "@semantic-release/npm"
+    ]
   },
   "keywords": [
     "javascript",
@@ -76,7 +87,7 @@
     "react": "16.3.2",
     "react-dom": "16.3.2",
     "react-test-renderer": "16.3.2",
-    "travis-deploy-once": "4.4.1",
+    "travis-deploy-once": "^5.0.0",
     "semantic-release": "^15.1.7"
   },
   "peerDependencies": {
