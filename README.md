@@ -33,8 +33,9 @@ import Fetchino from 'react-fetchino';
 
 class App extends Component {
   render() {
+    const url = 'https://swapi.co/api/planets/1/';
     return (
-      <Fetchino url="https://swapi.co/api/planets/1/">
+      <Fetchino url={url}>
         {({ loading, error, data }) => (
           <Fragment>
             { loading && <LoadingComponent /> }
@@ -52,18 +53,20 @@ class App extends Component {
 
 class App extends Component {
   render() {
+    const url = 'https://jsonplaceholder.typicode.com/posts';
+    const options = {
+      method: 'POST',
+      headers: {
+        'Content-type': 'application/json'
+      },
+      body: {
+        test: 'Test',
+      }
+    };
     return (
       <Fetchino
-        url="https://jsonplaceholder.typicode.com/posts"
-        options={{
-          method: 'POST',
-          headers: {
-            'Content-type': 'application/json'
-          },
-          body: {
-            test: 'Test',
-          }
-        }}
+        url={url}
+        options={options}
         render={({ loading, error, data }) => (
           <Fragment>
             {loading && <LoadingComponent />}
