@@ -1,0 +1,88 @@
+{
+  "name": "react-fetchino",
+  "description": "A tiny React component to fetch HTTP requests.",
+  "version": "1.0.0",
+  "author": "Alessio Minichiello <minichielloalessio@gmail.com>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lssmn/react-fetchino.git"
+  },
+  "main": "lib/fetchino.js",
+  "files": [
+    "lib"
+  ],
+  "scripts": {
+    "prebuild": "npm run clean && npm run lint && npm run test:coverage",
+    "build": "NODE_ENV=production babel src -d lib --ignore __tests__",
+    "clean": "rm -Rf lib",
+    "lint": "eslint ./src",
+    "test": "jest",
+    "test:coverage": "jest --coverage",
+    "test:watch": "jest --watchAll"
+  },
+  "keywords": [
+    "javascript",
+    "react",
+    "fetch",
+    "babel",
+    "jest",
+    "enzyme"
+  ],
+  "jest": {
+    "setupFiles": [
+      "<rootDir>/config/test.js"
+    ],
+    "testMatch": [
+      "<rootDir>/src/__tests__/**/*.js?(x)"
+    ],
+    "coverageDirectory": "<rootDir>/coverage",
+    "collectCoverageFrom": [
+      "src/**/*.{js,jsx}"
+    ],
+    "transform": {
+      "^.+\\.js$": "babel-jest"
+    },
+    "moduleFileExtensions": [
+      "js",
+      "jsx"
+    ],
+    "moduleDirectories": [
+      "node_modules",
+      "bower_components"
+    ]
+  },
+  "devDependencies": {
+    "babel-cli": "6.26.0",
+    "babel-eslint": "8.2.3",
+    "babel-jest": "22.4.3",
+    "babel-plugin-transform-class-properties": "6.24.1",
+    "babel-plugin-transform-object-rest-spread": "6.26.0",
+    "babel-plugin-transform-react-jsx": "6.24.1",
+    "babel-plugin-transform-runtime": "6.23.0",
+    "babel-preset-env": "1.6.1",
+    "enzyme": "3.3.0",
+    "enzyme-adapter-react-16": "1.1.1",
+    "eslint": "4.19.1",
+    "eslint-config-prettier": "2.9.0",
+    "eslint-plugin-babel": "5.1.0",
+    "eslint-plugin-jest": "21.15.1",
+    "eslint-plugin-prettier": "2.6.0",
+    "eslint-plugin-react": "7.7.0",
+    "jest": "22.4.3",
+    "jest-fetch-mock": "1.5.0",
+    "prettier": "1.12.1",
+    "prop-types": "15.6.1",
+    "react": "16.3.2",
+    "react-dom": "16.3.2",
+    "react-test-renderer": "16.3.2",
+    "travis-deploy-once": "4.4.1",
+    "semantic-release": "^15.1.7"
+  },
+  "peerDependencies": {
+    "react": ">=16.3.0"
+  },
+  "dependencies": {
+    "babel-runtime": "^6.26.0"
+  }
+}
