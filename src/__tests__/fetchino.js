@@ -129,51 +129,16 @@ describe('Fetchino', () => {
       expect(spyOnFetch).not.toHaveBeenCalled();
     });
     
-    it('should update only on certain conditions', () => {
-      const spyOnFetch = jest.spyOn(wrapper.instance(), 'fetch');
-      
-      wrapper.update();
-      
-      expect(wrapper.state().loading).toBeFalsy();
-      expect(wrapper.state().data).toBeTruthy();
-      expect(wrapper.state().error).toBeFalsy();
-      expect(spyOnFetch).not.toHaveBeenCalled();
-      
-      wrapper.setProps({
-        url: 'fake'
-      });
-      
-      expect(wrapper.state().loading).toBeTruthy();
-      expect(wrapper.state().data).toBeFalsy();
-      expect(wrapper.state().error).toBeFalsy();
-      expect(spyOnFetch).toHaveBeenCalled();
-    });
-    
-    it('should call getDerivedStateFromProps with the correct parameters', () => {
-      const spyOnGetDerivedStateFromProps = jest.spyOn(Fetchino, 'getDerivedStateFromProps');
-
+    it('should not update the state if the nextProps are equal to the prevState', () => {
       const nextProps = {
-        url: 'fake'
+        url: 'test',
+        options: {},
       };
       
-      wrapper.setProps(nextProps);
-      
-      expect(spyOnGetDerivedStateFromProps.mock.calls[0][0]).toEqual({
-        ...nextProps,
-        options: {}
-      });
-      
-      expect(spyOnGetDerivedStateFromProps.mock.calls[0][1]).toEqual({
-        ...mockProps,
-        loading: false,
-        error: null,
-        data: mockResponse,
-        options: {}
-      });
-    
+      expect(Fetchino.getDerivedStateFromProps(nextProps, { ...nextProps })).toEqual(null);
     });
     
-    it('should return the correct state', () => {
+    it('should update the state if the nextProps are equal to the prevState', () => {
       const prevState = {
         loading: true,
         error: null,
@@ -192,8 +157,40 @@ describe('Fetchino', () => {
         url: nextProps.url,
         options: nextProps.options,
       });
+    });
+    
+    it('should update when props change', () => {
+      const spyOnGetDerivedStateFromProps = jest.spyOn(Fetchino, 'getDerivedStateFromProps');
       
-      expect(Fetchino.getDerivedStateFromProps(nextProps, { ...nextProps })).toEqual(null);
+      const nextProps = {
+        url: 'fake'
+      };
+      
+      wrapper.setProps(nextProps);
+      
+      expect(spyOnGetDerivedStateFromProps.mock.calls[0][0]).toEqual({
+        ...nextProps,
+        options: {}
+      });
+      expect(spyOnGetDerivedStateFromProps.mock.calls[0][1]).toEqual({
+        ...mockProps,
+        loading: false,
+        error: null,
+        data: mockResponse,
+        options: {}
+      });
+    });
+    
+    it('should fetch when props change', () => {
+      const spyOnFetch = jest.spyOn(Fetchino.prototype, 'fetch');
+      
+      const nextProps = {
+        url: 'fake'
+      };
+      
+      wrapper.setProps(nextProps);
+      
+      expect(spyOnFetch).toHaveBeenCalled();
     });
     
   });
