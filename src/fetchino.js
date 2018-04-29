@@ -49,7 +49,11 @@ export default class Fetchino extends Component {
     const { url } = this.props;
     const { data, error } = this.state;
     
-    if (!!url && data === null && error === null) {
+    if (
+      !!url && 
+      data === null && 
+      error === null
+    ) {
       await this.fetch();
     }
   }
@@ -58,6 +62,7 @@ export default class Fetchino extends Component {
     try {
 
       const { url, options } = this.props;
+      
       const response = await fetch(url, options);
       const data = await response.json();
       
