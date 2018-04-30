@@ -47,6 +47,7 @@
     "testMatch": [
       "<rootDir>/src/__tests__/**/*.js?(x)"
     ],
+    "collectCoverage": true,
     "coverageDirectory": "<rootDir>/coverage",
     "collectCoverageFrom": [
       "src/**/*.{js,jsx}"
